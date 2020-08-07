@@ -19,4 +19,4 @@
 
     -   name: Installing Monit
         include_role:
-            name: pwslab.Monit
+            name: pwslab.monit

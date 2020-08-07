@@ -23,7 +23,7 @@
 
     -   name: Set Monit Conf - CentOS
         template:
-            src: "monitrc.j2"
+            src: "monitrc-centos.j2"
             dest: "/etc/monitrc"
         when:
                 - os_check.stdout | regex_search("CentOS")
