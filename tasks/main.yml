@@ -1,0 +1,38 @@
+---
+
+    -   name: Install Monit - Ubuntu
+        apt:
+            name: monit
+            state: present
+        when:
+            - os_check.stdout | regex_search("Ubuntu")
+
+    -   name: Install Monit - CentOS
+        yum:
+            name: monit
+            state: present
+        when:
+            - os_check.stdout | regex_search("CentOS")
+
+    -   name: Set Monit Conf - Ubuntu
+        template:
+            src: "monitrc.j2"
+            dest: "/etc/monit/monitrc"
+        when:
+                - os_check.stdout | regex_search("Ubuntu")
+
+    -   name: Set Monit Conf - CentOS
+        template:
+            src: "monitrc.j2"
+            dest: "/etc/monitrc"
+        when:
+                - os_check.stdout | regex_search("CentOS")
+
+    -   name: restart service Monit
+        systemd:
+            state: restarted
+            daemon_reload: yes
+            name: monit
+            enabled: yes
+
+    

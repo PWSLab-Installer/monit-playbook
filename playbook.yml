@@ -1,0 +1,22 @@
+- hosts: localhost
+  connection: local
+  vars:
+    
+
+  tasks:
+
+    - name: Check the version of CentOS
+      command: hostnamectl
+      register: os_check
+      ignore_errors: yes
+
+    - name: Fetch Monit Role
+      git:
+        repo: https://ro:v1qS_annUgCHHc9a2vSE@pwslab.org/ansible/monit-playbook.git
+        dest: /root/.ansible/roles/pwslab.monit
+        version: master
+        force: yes
+
+    -   name: Installing Monit
+        include_role:
+            name: pwslab.Monit
